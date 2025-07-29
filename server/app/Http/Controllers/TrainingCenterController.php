@@ -13,7 +13,7 @@ class TrainingCenterController extends Controller
     {
         try {
             $trainees = Trainee::with('training_center')->latest()->paginate(10);
-            return response()->json(['success' => true, 'data' => $trainees], 200);
+            return response()->json($trainees, 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }

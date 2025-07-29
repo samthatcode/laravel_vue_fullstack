@@ -3,7 +3,7 @@
     <h2>{{ trainee.name }}'s Profile</h2>
 
     <!-- Trainee Info -->
-    <div class="bg-gray-200 p-4 rounded">
+    <div class="p-4 bg-gray-200 rounded">
       <p><strong>Skill level:</strong> {{ trainee.skill }}</p>
       <p><strong>Id:</strong> {{ trainee.id }}</p>
       <p><strong>About me:</strong></p>
@@ -11,7 +11,7 @@
     </div>
 
     <!-- Training Center Info -->
-    <div class="border-2 border-dashed bg-white px-4 pb-4 my-4 rounded">
+    <div class="px-4 pb-4 my-4 bg-white border-2 border-dashed rounded">
       <h3>Training Center Information</h3>
       <p>
         <strong>Training Center name:</strong>
@@ -23,8 +23,8 @@
     </div>
 
     <!-- Delete a Trainee -->
-    <form @submit.prevent="deleteTrainee">
-      <button type="submit" class="btn my-4">Delete Trainee</button>
+    <form @submit.prevent="deleteTrainee(trainee.id)">
+      <button type="submit" class="my-4 btn">Delete Trainee</button>
     </form>
   </div>
 </template>
@@ -54,7 +54,7 @@ export default {
     async fetchTrainee(id) {
       try {
         const response = await api.getTraineeById(id);
-        this.trainee = response.data.data.data;
+        this.trainee = response.data.data;
       } catch (error) {
         console.error(
           "Error fetching trainee:",
@@ -78,6 +78,8 @@ export default {
   },
   mounted() {
     const traineeId = this.$route.params.id; // Get trainee ID from route params
+    console.log("Trainee ID:", traineeId);
+
     this.fetchTrainee(traineeId);
   },
 };

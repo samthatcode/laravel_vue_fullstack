@@ -5,8 +5,10 @@
         <h1>
           <router-link to="/">Trainee Network</router-link>
         </h1>
-        <router-link to="/trainees">All Trainee</router-link>
-        <router-link to="/trainees/create">Create New Trainee</router-link>
+        <router-link :to="{ name: 'TraineesList' }">All Trainee</router-link>
+        <router-link :to="{ name: 'CreateTrainee' }"
+          >Create New Trainee</router-link
+        >
       </nav>
     </header>
 

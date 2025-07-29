@@ -10,5 +10,7 @@ Route::get('/user', function (Request $request) {
 
 Route::apiResource('trainees', TrainingCenterController::class);
 
+Route::get('/training-centers', [TrainingCenterController::class, 'listTrainingCenters']);
+
 
 // http://localhost:8000/api/trainees
