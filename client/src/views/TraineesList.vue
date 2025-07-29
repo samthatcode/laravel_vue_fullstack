@@ -31,15 +31,13 @@
 
     <!-- Pagination Controls -->
     <div class="pagination">
-      <button
-        @click="fetchTrainees(currentPage - 1)"
-        :disabled="currentPage <= 1"
-      >
+      <button @click="goToPage(currentPage - 1)" :disabled="currentPage <= 1">
         Previous
       </button>
       <span>Page {{ currentPage }} of {{ lastPage }}</span>
+
       <button
-        @click="fetchTrainees(currentPage + 1)"
+        @click="goToPage(currentPage + 1)"
         :disabled="currentPage >= lastPage"
       >
         Next
@@ -62,12 +60,15 @@ export default {
     };
   },
   methods: {
+    goToPage(page) {
+      this.$router.push({ path: "/trainees", query: { page } });
+    },
     async fetchTrainees(page = 1) {
       try {
         const response = await api.getTrainees({ page });
-        this.trainees = response.data.data.data; // Adjust based on API response structure
-        this.currentPage = response.data.meta.current_page; // Assuming meta contains pagination info
-        this.lastPage = response.data.meta.last_page;
+        this.trainees = response.data.data;
+        this.currentPage = response.data.current_page;
+        this.lastPage = response.data.last_page;
       } catch (error) {
         console.error(
           "Error fetching trainees:",
@@ -77,7 +78,14 @@ export default {
     },
   },
   mounted() {
-    this.fetchTrainees();
+    const page = parseInt(this.$route.query.page) || 1;
+    this.fetchTrainees(page);
+    // this.fetchTrainees();
+  },
+  watch: {
+    "$route.query.page"(newPage) {
+      this.fetchTrainees(parseInt(newPage) || 1);
+    },
   },
 };
 </script>
