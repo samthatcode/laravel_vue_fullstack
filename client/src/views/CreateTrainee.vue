@@ -11,7 +11,7 @@
           id="name"
           v-model="form.name"
           required
-          class="border border-gray-300 p-2 rounded"
+          class="p-2 border border-gray-300 rounded"
         />
       </div>
 
@@ -27,7 +27,7 @@
           min="0"
           max="100"
           required
-          class="border border-gray-300 p-2 rounded"
+          class="p-2 border border-gray-300 rounded"
         />
       </div>
 
@@ -39,7 +39,7 @@
           id="bio"
           v-model="form.bio"
           required
-          class="border border-gray-300 p-2 rounded resize-none"
+          class="p-2 border border-gray-300 rounded resize-none"
         ></textarea>
       </div>
 
@@ -52,7 +52,7 @@
           id="training_center_id"
           v-model="form.training_center_id"
           required
-          class="border border-gray-300 p-2 rounded"
+          class="p-2 border border-gray-300 rounded"
         >
           <option value="" disabled>Select a Center</option>
           <option
@@ -67,7 +67,7 @@
 
       <button
         type="submit"
-        class="w-full px-4 py-2 bg-red-400 text-white rounded hover:bg-red-500 transition duration-300 ease-in-out"
+        class="w-full px-4 py-2 text-white transition duration-300 ease-in-out bg-red-400 rounded hover:bg-red-500"
       >
         Create Trainee
       </button>
@@ -104,8 +104,8 @@ export default {
   methods: {
     async fetchTrainingCenters() {
       try {
-        const response = await api.getTrainingCenters();
-        this.trainingCenters = response.data.data.data;
+        const res = await api.getTrainingCenters();
+        this.trainingCenters = res.data;
       } catch (error) {
         console.error(
           "Error fetching training centers:",

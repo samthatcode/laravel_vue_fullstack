@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getTransitionRawChildren } from 'vue';
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost:8000/api',
+    baseURL: 'http://localhost:8000/api/v1/trainees',
     headers: {
         'Content-Type': 'application/json',
     },
@@ -10,19 +10,19 @@ const apiClient = axios.create({
 
 export default {
     getTrainees(params = {}) {
-        return apiClient.get('/trainees', { params });
+        return apiClient.get('', { params });
     },
     getTraineeById(id) {
-        return apiClient.get(`/trainees/${id}`);
+        return apiClient.get(`/${id}`);
     },
     createTrainee(data) {
-        return apiClient.post('/trainees', data);
+        return apiClient.post('', data);
     },
     updateTrainee(id, data) {
-        return apiClient.put(`/trainees/${id}`, data);
+        return apiClient.put(`/${id}`, data);
     },
     deleteTrainee(id) {
-        return apiClient.delete(`/trainees/${id}`);
+        return apiClient.delete(`/${id}`);
     },
     getTrainingCenters() {
         return apiClient.get('/training-centers');

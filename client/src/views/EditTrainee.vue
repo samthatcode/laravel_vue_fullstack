@@ -119,8 +119,8 @@ export default {
 
     async fetchTrainingCenters() {
       try {
-        const response = await api.getTrainingCenters();
-        this.trainingCenters = response.data;
+        const res = await api.getTrainingCenters();
+        this.trainingCenters = res.data;
       } catch (error) {
         console.error(
           "Error fetching training centers:",
